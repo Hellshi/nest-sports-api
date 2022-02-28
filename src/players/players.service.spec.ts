@@ -1,17 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePlayerDto } from './dtos/create-player.dto';
-import { PlayersController } from './players.controller';
 import { PlayersService } from './players.service';
 
-describe('PlayersController', () => {
-  let controller: PlayersController;
+describe('PlayersService', () => {
+  let service: PlayersService;
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [PlayersController],
       providers: [PlayersService],
     }).compile();
 
-    controller = module.get<PlayersController>(PlayersController);
+    service = module.get<PlayersService>(PlayersService);
   });
 
   const generateUser = (): CreatePlayerDto => ({
@@ -22,13 +21,11 @@ describe('PlayersController', () => {
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
-
-  it('should be called with correct values', async () => {
+  it('should return an user on success', async () => {
     const user: CreatePlayerDto = generateUser();
-    const createOrUpdateSpy = jest.spyOn(controller, 'createOrUpdatePlayer');
-    await controller.createOrUpdatePlayer(user);
-    expect(createOrUpdateSpy).toHaveBeenCalledWith(user);
+    const response = await service.createOrUpdatePlayer(user);
+    expect(response._id).toBeTruthy();
   });
 });
