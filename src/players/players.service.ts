@@ -8,9 +8,22 @@ export class PlayersService {
   private players: Player[] = [];
   private readonly logger = new Logger(PlayersService.name);
 
+  private async findPlayer(email: string): Promise<Player | undefined> {
+    const player = this.players.filter((player) => player.email === email);
+    return player[0];
+  }
+
   async createOrUpdatePlayer(player: CreatePlayerDto): Promise<Player> {
-    this.logger.log(`Player being created ${player}`);
-    return this.create(player);
+    const Existingplayer = await this.findPlayer(player.email);
+    if (!Existingplayer) {
+      this.logger.log(`Player being created ${player}`);
+      return this.create(player);
+    }
+    return this.updatePlayer(Existingplayer, player);
+  }
+
+  private updatePlayer(oldPlayer: Player, newPlayer: CreatePlayerDto) {
+    return { ...oldPlayer, ...newPlayer };
   }
 
   private create(player: CreatePlayerDto): Player {
@@ -26,5 +39,10 @@ export class PlayersService {
     };
     this.players.push(createdPlayer);
     return createdPlayer;
+  }
+
+  async getAllPlayers(): Promise<Player[]> {
+    console.log(this.players);
+    return this.players;
   }
 }
