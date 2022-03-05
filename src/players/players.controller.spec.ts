@@ -1,7 +1,9 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePlayerDto } from './dtos/create-player.dto';
 import { PlayersController } from './players.controller';
 import { PlayersService } from './players.service';
+import { generateUser } from './testHelperts';
 
 describe('PlayersController', () => {
   let controller: PlayersController;
@@ -14,13 +16,6 @@ describe('PlayersController', () => {
     controller = module.get<PlayersController>(PlayersController);
   });
 
-  const generateUser = (): CreatePlayerDto => ({
-    email: 'hell@theHell.com',
-    name: 'Hell without I of indigo',
-    phone: 'who cares?',
-    playerPicture: '',
-  });
-
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
@@ -30,5 +25,18 @@ describe('PlayersController', () => {
     const createOrUpdateSpy = jest.spyOn(controller, 'createOrUpdatePlayer');
     await controller.createOrUpdatePlayer(user);
     expect(createOrUpdateSpy).toHaveBeenCalledWith(user);
+  });
+
+  it('should update an array of players on success', async () => {
+    const players = await controller.getAllPlayers();
+    expect(players).toBeTruthy();
+  });
+
+  it('should return undefined when an unknow email is provides', async () => {
+    try {
+      await controller.getAllPlayers('helltheHell@hell.com');
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotFoundException);
+    }
   });
 });

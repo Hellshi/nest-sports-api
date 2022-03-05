@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePlayerDto } from './dtos/create-player.dto';
 import { PlayersService } from './players.service';
+import { generateUser } from './testHelperts';
 
 describe('PlayersService', () => {
   let service: PlayersService;
@@ -11,13 +12,6 @@ describe('PlayersService', () => {
     }).compile();
 
     service = module.get<PlayersService>(PlayersService);
-  });
-
-  const generateUser = (): CreatePlayerDto => ({
-    email: 'hell@theHell.com',
-    name: 'Hell without I of indigo',
-    phone: 'who cares?',
-    playerPicture: '',
   });
 
   it('should be defined', () => {
