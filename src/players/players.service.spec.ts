@@ -37,4 +37,23 @@ describe('PlayersService', () => {
     const response = await service.createOrUpdatePlayer(updatedUser);
     expect(response._id).toBe(originalUser._id);
   });
+
+  it('should return an array on success', async () => {
+    jest.spyOn(service, 'findPlayerOrFail').mockReturnValue(
+      new Promise((resolve) =>
+        resolve({
+          _id: 'any_id',
+          email: '',
+          phone: '',
+          rakingPosition: '1',
+          raking: '',
+          name: '',
+          playerPicture: '',
+        }),
+      ),
+    );
+
+    const response = await service.deletePlayer('valid@mail.com');
+    expect(response).toBeTruthy();
+  });
 });
