@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreatePlayerDto } from './dtos/create-player.dto';
-import { PlayersController } from './players.controller';
-import { PlayersService } from './players.service';
+import { CreatePlayerDto } from '../interfaces/dtos/create-player.dto';
+import { PlayersController } from '../players.controller';
+import { PlayersService } from '../players.service';
 import { generateUser } from './testHelperts';
 
 describe('PlayersController', () => {

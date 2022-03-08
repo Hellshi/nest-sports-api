@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreatePlayerDto } from './dtos/create-player.dto';
-import { PlayersService } from './players.service';
+import { CreatePlayerDto } from '../interfaces/dtos/create-player.dto';
+import { PlayersService } from '../players.service';
 import { generateUser } from './testHelperts';
 
 describe('PlayersService', () => {
@@ -42,7 +42,7 @@ describe('PlayersService', () => {
     jest.spyOn(service, 'findPlayerOrFail').mockReturnValue(
       new Promise((resolve) =>
         resolve({
-          id: 'any_id',
+          id: 1,
           email: '',
           phone: '',
           rakingPosition: '1',

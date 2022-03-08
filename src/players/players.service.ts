@@ -1,13 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { randomUUID } from 'crypto';
-import { CreatePlayerDto } from './dtos/create-player.dto';
-import { Player } from './interfaces/player';
+import { CreatePlayerDto } from './interfaces/dtos/create-player.dto';
+import { IPlayer } from './interfaces/player';
 
 @Injectable()
 export class PlayersService {
-  private players: Player[] = [];
+  private players: IPlayer[] = [];
 
-  async findPlayerOrFail(email: string): Promise<Player> {
+  async findPlayerOrFail(email: string): Promise<IPlayer> {
     const player = await this.findPlayer(email);
     if (!player) {
       throw new NotFoundException(`Not found player`);
@@ -15,12 +14,12 @@ export class PlayersService {
     return player;
   }
 
-  async findPlayer(email: string): Promise<Player | undefined> {
+  async findPlayer(email: string): Promise<IPlayer | undefined> {
     const player = this.players.filter((player) => player.email === email);
     return player[0];
   }
 
-  async createOrUpdatePlayer(player: CreatePlayerDto): Promise<Player> {
+  async createOrUpdatePlayer(player: CreatePlayerDto): Promise<IPlayer> {
     const Existingplayer = await this.findPlayer(player.email);
     if (!Existingplayer) {
       return this.create(player);
@@ -28,14 +27,14 @@ export class PlayersService {
     return this.updatePlayer(Existingplayer, player);
   }
 
-  private updatePlayer(oldPlayer: Player, newPlayer: CreatePlayerDto) {
+  private updatePlayer(oldPlayer: IPlayer, newPlayer: CreatePlayerDto) {
     return { ...oldPlayer, ...newPlayer };
   }
 
-  private create(player: CreatePlayerDto): Player {
+  private create(player: CreatePlayerDto): IPlayer {
     const { email, phone, playerPicture, name } = player;
-    const createdPlayer: Player = {
-      id: randomUUID(),
+    const createdPlayer: IPlayer = {
+      id: 1,
       email,
       name,
       phone,
@@ -47,11 +46,11 @@ export class PlayersService {
     return createdPlayer;
   }
 
-  async getAllPlayers(): Promise<Player[]> {
+  async getAllPlayers(): Promise<IPlayer[]> {
     return this.players;
   }
 
-  async deletePlayer(email: string): Promise<Player[]> {
+  async deletePlayer(email: string): Promise<IPlayer[]> {
     await this.findPlayerOrFail(email);
     const newplayers = this.players.filter((player) => player.email !== email);
     this.players = newplayers;

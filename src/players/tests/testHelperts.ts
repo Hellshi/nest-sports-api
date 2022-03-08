@@ -1,6 +1,6 @@
-import { CreatePlayerDto } from './dtos/create-player.dto';
-import { Player } from './interfaces/player';
-import { PlayersService } from './players.service';
+import { CreatePlayerDto } from '../interfaces/dtos/create-player.dto';
+import { IPlayer } from '../interfaces/player';
+import { PlayersService } from '../players.service';
 
 export const generateUser = (): CreatePlayerDto => ({
   email: 'hell@theHell.com',
@@ -9,7 +9,7 @@ export const generateUser = (): CreatePlayerDto => ({
   playerPicture: '',
 });
 
-export const createAPlayer = async (): Promise<Player> => {
+export const createAPlayer = async (): Promise<IPlayer> => {
   const player = await new PlayersService().createOrUpdatePlayer(
     generateUser(),
   );
