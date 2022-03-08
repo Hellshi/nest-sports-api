@@ -17,7 +17,7 @@ import { PlayersModule } from './players/players.module';
       username: config().database.user,
       password: config().database.password,
       database: config().database.database,
-      entities: [],
+      entities: ['src/database/entities/*.ts'],
       synchronize: true,
     }),
   ],

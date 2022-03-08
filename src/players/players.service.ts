@@ -35,7 +35,7 @@ export class PlayersService {
   private create(player: CreatePlayerDto): Player {
     const { email, phone, playerPicture, name } = player;
     const createdPlayer: Player = {
-      _id: randomUUID(),
+      id: randomUUID(),
       email,
       name,
       phone,

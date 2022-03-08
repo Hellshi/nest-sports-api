@@ -1,5 +1,5 @@
 export interface Player {
-  readonly _id: string;
+  readonly id: string;
   readonly email: string;
   readonly phone: string;
   rakingPosition: string;

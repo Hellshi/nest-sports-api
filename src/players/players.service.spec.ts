@@ -20,7 +20,7 @@ describe('PlayersService', () => {
   it('should return an user on success', async () => {
     const user: CreatePlayerDto = generateUser();
     const response = await service.createOrUpdatePlayer(user);
-    expect(response._id).toBeTruthy();
+    expect(response.id).toBeTruthy();
   });
   it('should return an array of players on success', async () => {
     const response = await service.getAllPlayers();
@@ -35,14 +35,14 @@ describe('PlayersService', () => {
       ...{ name: 'From dust to dust' },
     };
     const response = await service.createOrUpdatePlayer(updatedUser);
-    expect(response._id).toBe(originalUser._id);
+    expect(response.id).toBe(originalUser.id);
   });
 
   it('should return an array on success', async () => {
     jest.spyOn(service, 'findPlayerOrFail').mockReturnValue(
       new Promise((resolve) =>
         resolve({
-          _id: 'any_id',
+          id: 'any_id',
           email: '',
           phone: '',
           rakingPosition: '1',
