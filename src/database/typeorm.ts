@@ -9,6 +9,7 @@ export default {
   database: config().database.database,
   entities: ['src/database/entities/*.ts'],
   migrations: ['src/database/migrations/*.ts'],
+  synchronize: true,
   cli: {
     migrationsDir: 'src/database/migrations',
   },

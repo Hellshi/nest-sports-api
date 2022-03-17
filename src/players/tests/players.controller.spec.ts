@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { userEntity } from '../../database/entities/user.entity';
 import { CreatePlayerDto } from '../interfaces/dtos/create-player.dto';
 import { PlayersController } from '../players.controller';
 import { PlayersService } from '../players.service';
@@ -13,6 +15,7 @@ describe('PlayersController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PlayersController],
       providers: [PlayersService],
+      imports: [TypeOrmModule.forFeature([userEntity])],
     }).compile();
 
     controller = module.get<PlayersController>(PlayersController);

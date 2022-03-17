@@ -32,18 +32,22 @@ export class users1646696064710 implements MigrationInterface {
           {
             name: 'phone',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'rakingPosition',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'raking',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'playerPicture',
             type: 'varchar',
+            isNullable: true,
           },
         ],
       }),

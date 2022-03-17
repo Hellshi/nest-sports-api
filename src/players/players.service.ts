@@ -1,10 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { userEntity } from '../database/entities/user.entity';
 import { CreatePlayerDto } from './interfaces/dtos/create-player.dto';
 import { IPlayer } from './interfaces/player';
 
 @Injectable()
 export class PlayersService {
   private players: IPlayer[] = [];
+
+  constructor(
+    @InjectRepository(userEntity)
+    private usersRepository: Repository<userEntity>,
+  ) {}
 
   async findPlayerOrFail(email: string): Promise<IPlayer> {
     const player = await this.findPlayer(email);
@@ -20,6 +28,8 @@ export class PlayersService {
   }
 
   async createOrUpdatePlayer(player: CreatePlayerDto): Promise<IPlayer> {
+    await this.usersRepository.insert(player);
+
     const Existingplayer = await this.findPlayer(player.email);
     if (!Existingplayer) {
       return this.create(player);
@@ -31,7 +41,7 @@ export class PlayersService {
     return { ...oldPlayer, ...newPlayer };
   }
 
-  private create(player: CreatePlayerDto): IPlayer {
+  private async create(player: CreatePlayerDto): Promise<IPlayer> {
     const { email, phone, playerPicture, name } = player;
     const createdPlayer: IPlayer = {
       id: 1,

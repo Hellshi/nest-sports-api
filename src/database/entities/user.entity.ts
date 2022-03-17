@@ -2,7 +2,7 @@ import { IPlayer } from 'src/players/interfaces/player';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User implements IPlayer {
+export class userEntity implements IPlayer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,14 +13,21 @@ export class User implements IPlayer {
   email: string;
 
   @Column()
-  playerPicture: string;
+  playerPicture?: string;
 
   @Column()
   phone: string;
 
-  @Column()
-  rakingPosition: string;
+  @Column({
+    default: undefined,
+  })
+  rakingPosition?: string | undefined;
 
   @Column()
-  raking: string;
+  raking?: string;
+
+  @Column({
+    default: 'PLAYER',
+  })
+  role?: 'ADMIN' | 'PLAYER';
 }
