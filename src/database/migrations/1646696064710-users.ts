@@ -8,10 +8,10 @@ export class users1646696064710 implements MigrationInterface {
         columns: [
           {
             name: 'id',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
-            generatedType: 'STORED',
-            type: 'integer',
+            generationStrategy: 'increment',
           },
           {
             name: 'name',
@@ -28,11 +28,13 @@ export class users1646696064710 implements MigrationInterface {
             name: 'email',
             isNullable: false,
             type: 'varchar',
+            isUnique: true,
           },
           {
             name: 'phone',
             type: 'varchar',
             isNullable: true,
+            isUnique: true,
           },
           {
             name: 'rakingPosition',

@@ -39,8 +39,8 @@ export class PlayersService {
     return { ...oldPlayer, ...newPlayer };
   }
 
-  private async create(player: CreatePlayerDto): Promise<any> {
-    return this.usersRepository.insert(player);
+  private async create(player: CreatePlayerDto): Promise<IPlayer> {
+    return this.usersRepository.save(player);
   }
 
   async getAllPlayers(): Promise<IPlayer[]> {
