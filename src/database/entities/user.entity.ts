@@ -1,8 +1,18 @@
 import { IPlayer } from 'src/players/interfaces/player';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  // eslint-disable-next-line prettier/prettier
+  UpdateDateColumn
+} from 'typeorm';
 
-@Entity()
-export class userEntity implements IPlayer {
+@Entity({
+  name: 'users',
+})
+export class userEntity extends BaseEntity implements IPlayer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,13 +28,23 @@ export class userEntity implements IPlayer {
   @Column()
   phone: string;
 
-  @Column({
-    default: undefined,
-  })
-  rakingPosition?: string | undefined;
+  @Column()
+  rakingPosition?: string;
 
   @Column()
   raking?: string;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+  })
+  updatedAt: Date;
 
   @Column({
     default: 'PLAYER',

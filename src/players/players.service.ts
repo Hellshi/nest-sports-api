@@ -28,8 +28,6 @@ export class PlayersService {
   }
 
   async createOrUpdatePlayer(player: CreatePlayerDto): Promise<IPlayer> {
-    await this.usersRepository.insert(player);
-
     const Existingplayer = await this.findPlayer(player.email);
     if (!Existingplayer) {
       return this.create(player);
@@ -41,19 +39,8 @@ export class PlayersService {
     return { ...oldPlayer, ...newPlayer };
   }
 
-  private async create(player: CreatePlayerDto): Promise<IPlayer> {
-    const { email, phone, playerPicture, name } = player;
-    const createdPlayer: IPlayer = {
-      id: 1,
-      email,
-      name,
-      phone,
-      playerPicture,
-      raking: 'A',
-      rakingPosition: '1',
-    };
-    this.players.push(createdPlayer);
-    return createdPlayer;
+  private async create(player: CreatePlayerDto): Promise<any> {
+    return this.usersRepository.insert(player);
   }
 
   async getAllPlayers(): Promise<IPlayer[]> {

@@ -49,6 +49,16 @@ export class users1646696064710 implements MigrationInterface {
             type: 'varchar',
             isNullable: true,
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
         ],
       }),
     );
