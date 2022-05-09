@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {
   Body,
-  Controller, Get, Post
+  Controller, Get, Post, UsePipes, ValidationPipe
 } from '@nestjs/common';
 import { CreatePlayerDto } from './interfaces/dtos/create-player.dto';
 import { PlayersService } from './players.service';
@@ -11,6 +11,7 @@ export class PlayersController {
   constructor(private readonly PlayersServices: PlayersService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   async createOrUpdatePlayer(@Body() player: CreatePlayerDto) {
     const user = await this.PlayersServices.createOrUpdatePlayer(player);
     return JSON.stringify(user);
@@ -25,6 +26,7 @@ export class PlayersController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   async deletePlayer(@Body('email') email: string) {
     await this.PlayersServices.deletePlayer(email)
     return 'ok'

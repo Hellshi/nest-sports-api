@@ -47,6 +47,8 @@ export class userEntity extends BaseEntity implements IPlayer {
   updatedAt: Date;
 
   @Column({
+    type: 'enum',
+    enum: ['ADMIN', 'PLAYER'],
     default: 'PLAYER',
   })
   role?: 'ADMIN' | 'PLAYER';

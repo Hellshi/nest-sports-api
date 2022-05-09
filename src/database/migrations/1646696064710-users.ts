@@ -23,6 +23,7 @@ export class users1646696064710 implements MigrationInterface {
             isNullable: false,
             type: 'enum',
             enum: ['ADMIN', 'PLAYER'],
+            default: '"PLAYER"',
           },
           {
             name: 'email',
