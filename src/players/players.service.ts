@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { userEntity } from '../database/entities/user.entity';
 import { CreatePlayerDto } from './interfaces/dtos/create-player.dto';
+import { UpdatePlayerDto } from './interfaces/dtos/update-player.dto';
 import { IPlayer } from './interfaces/player';
 
 @Injectable()
@@ -24,11 +25,10 @@ export class PlayersService {
     return this.usersRepository.save(player);
   }
 
-  async updatePlayer(player: CreatePlayerDto): Promise<UpdateResult> {
-    const Existingplayer = await this.usersRepository.findOneOrFail(undefined, {
-      where: { email: player.email },
-    });
-    return this.usersRepository.update(Existingplayer.id, player);
+  async updatePlayer(id, player: UpdatePlayerDto): Promise<any> {
+    const Existingplayer = await this.usersRepository.findOneOrFail(id);
+    await this.usersRepository.update(Existingplayer.id, player);
+    return 'ok';
   }
 
   async getAllPlayers(): Promise<IPlayer[]> {
