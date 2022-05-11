@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './configuration/config';
 import { PlayersModule } from './players/players.module';
+import { CategoriesModule } from './categories/categories.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import { PlayersModule } from './players/players.module';
       entities: ['./database/entities/*.ts'],
       autoLoadEntities: true,
     }),
+    CategoriesModule,
   ],
   controllers: [],
   providers: [],
