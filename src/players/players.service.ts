@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { userEntity } from '../database/entities/user.entity';
+import { UserEntity } from '../database/entities/user.entity';
 import { CreatePlayerDto } from './interfaces/dtos/create-player.dto';
 import { UpdatePlayerDto } from './interfaces/dtos/update-player.dto';
 import { IPlayer } from './interfaces/player';
@@ -11,8 +11,8 @@ export class PlayersService {
   private players: IPlayer[] = [];
 
   constructor(
-    @InjectRepository(userEntity)
-    private usersRepository: Repository<userEntity>,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
   ) {}
 
   async createPlayer(player: CreatePlayerDto): Promise<IPlayer> {

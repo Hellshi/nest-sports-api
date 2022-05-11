@@ -1,8 +1,11 @@
-import { IEvent } from 'src/categories/interfaces/categories';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ICategories, IEvent } from 'src/categories/interfaces/categories';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { CategoryEntity } from './';
 
-@Entity()
-export class Event implements IEvent {
+@Entity({
+  name: 'events',
+})
+export class EventEntity implements IEvent {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,6 +20,9 @@ export class Event implements IEvent {
 
   @Column()
   categoryId: number;
+
+  @ManyToOne(() => CategoryEntity, (category) => category.events)
+  category?: ICategories;
 
   @Column()
   createdAt: Date;

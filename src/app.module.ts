@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoriesModule } from './categories/categories.module';
 import config from './configuration/config';
 import { PlayersModule } from './players/players.module';
-import { CategoriesModule } from './categories/categories.module';
-import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [

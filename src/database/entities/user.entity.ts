@@ -1,18 +1,21 @@
+import { ICategories } from 'src/categories/interfaces/categories';
 import { IPlayer } from 'src/players/interfaces/player';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   // eslint-disable-next-line prettier/prettier
   UpdateDateColumn
 } from 'typeorm';
+import { CategoryEntity } from './';
 
 @Entity({
   name: 'users',
 })
-export class userEntity extends BaseEntity implements IPlayer {
+export class UserEntity extends BaseEntity implements IPlayer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -33,6 +36,9 @@ export class userEntity extends BaseEntity implements IPlayer {
 
   @Column()
   raking?: string;
+
+  @OneToOne(() => CategoryEntity, (category) => category.players)
+  category?: ICategories;
 
   @CreateDateColumn({
     type: 'timestamp',

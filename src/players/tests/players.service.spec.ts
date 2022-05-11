@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { userEntity } from '../../database/entities/user.entity';
+import { UserEntity } from '../../database/entities/user.entity';
 import { CreatePlayerDto } from '../interfaces/dtos/create-player.dto';
 import { PlayersService } from '../players.service';
 import { generateUser } from './testHelperts';
@@ -11,7 +11,7 @@ describe('PlayersService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [PlayersService],
-      imports: [TypeOrmModule.forFeature([userEntity])],
+      imports: [TypeOrmModule.forFeature([UserEntity])],
     }).compile();
 
     service = module.get<PlayersService>(PlayersService);
