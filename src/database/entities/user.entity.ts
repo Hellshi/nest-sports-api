@@ -37,7 +37,7 @@ export class UserEntity extends BaseEntity implements IPlayer {
   @Column()
   raking?: string;
 
-  @OneToOne(() => CategoryEntity, (category) => category.players)
+  @OneToOne(() => CategoryEntity, (category) => category.player)
   category?: ICategories;
 
   @CreateDateColumn({

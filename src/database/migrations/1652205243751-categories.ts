@@ -23,7 +23,7 @@ export class categories1652205243751 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'players',
+            name: 'playerId',
             type: 'int',
             isNullable: false,
           },

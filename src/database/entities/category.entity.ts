@@ -32,7 +32,10 @@ export class CategoryEntity implements ICategories {
   events?: IEvent[];
 
   @OneToOne(() => UserEntity, (user) => user.category)
-  players: IPlayer;
+  player?: IPlayer;
+
+  @Column()
+  playerId: number;
 
   @Column()
   createdAt: Date;
