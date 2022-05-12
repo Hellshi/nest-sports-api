@@ -2,6 +2,7 @@ import { IPlayer } from 'src/players/interfaces/player';
 import {
   Column,
   Entity,
+  JoinTable,
   OneToMany,
   OneToOne,
   // eslint-disable-next-line prettier/prettier
@@ -20,7 +21,14 @@ export class CategoryEntity implements ICategories {
   @Column()
   description: string;
 
-  @OneToMany(() => EventEntity, (events) => events.category)
+  @OneToMany(() => EventEntity, (events) => events.category, { cascade: true })
+  @JoinTable({
+    name: 'events',
+    joinColumn: {
+      name: 'categoryId',
+      referencedColumnName: 'id',
+    },
+  })
   events?: IEvent[];
 
   @OneToOne(() => UserEntity, (user) => user.category)

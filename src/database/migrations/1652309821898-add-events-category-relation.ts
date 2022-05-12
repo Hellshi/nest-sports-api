@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
+import { ForeignKeyMetadata } from 'typeorm/metadata/ForeignKeyMetadata';
 
 export class addEventsCategoryRelation1652309821898
   implements MigrationInterface
@@ -15,6 +16,12 @@ export class addEventsCategoryRelation1652309821898
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('categories', 'categoryId');
+    const eventsTable = await queryRunner.getTable('events');
+    const foreignKey = (eventsTable as any).foreignKeys.find(
+      (fk: ForeignKeyMetadata) => fk.columnNames.indexOf('events') !== -1,
+    );
+    if (foreignKey) {
+      await queryRunner.dropForeignKey('events', foreignKey);
+    }
   }
 }
