@@ -1,8 +1,4 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class events1652205226075 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -23,11 +19,6 @@ export class events1652205226075 implements MigrationInterface {
           },
           {
             name: 'value',
-            type: 'int',
-            isNullable: false,
-          },
-          {
-            name: 'categoryId',
             type: 'int',
             isNullable: false,
           },
