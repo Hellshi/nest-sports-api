@@ -44,7 +44,7 @@ export class categories1652205243751 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'categories',
       new TableForeignKey({
-        columnNames: ['players'],
+        columnNames: ['playerId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
       }),

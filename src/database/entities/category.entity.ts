@@ -9,12 +9,12 @@ import {
   PrimaryGeneratedColumn
 } from 'typeorm';
 import { ICategories, IEvent } from '../../categories/interfaces/categories';
-import { EventEntity, UserEntity } from './';
+import { BaseModel, EventEntity, UserEntity } from './';
 
 @Entity({
   name: 'categories',
 })
-export class CategoryEntity implements ICategories {
+export class CategoryEntity extends BaseModel implements ICategories {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -36,10 +36,4 @@ export class CategoryEntity implements ICategories {
 
   @Column()
   playerId: number;
-
-  @Column()
-  createdAt: Date;
-
-  @Column()
-  updatedAt: Date;
 }

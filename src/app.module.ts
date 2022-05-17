@@ -8,6 +8,7 @@ import { PlayersModule } from './players/players.module';
 @Module({
   imports: [
     PlayersModule,
+    CategoriesModule,
     ConfigModule.forRoot({
       load: [],
     }),

@@ -1,11 +1,11 @@
 import { ICategories, IEvent } from 'src/categories/interfaces/categories';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { CategoryEntity } from './';
+import { BaseModel, CategoryEntity } from './';
 
 @Entity({
   name: 'events',
 })
-export class EventEntity implements IEvent {
+export class EventEntity extends BaseModel implements IEvent {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,10 +23,4 @@ export class EventEntity implements IEvent {
 
   @ManyToOne(() => CategoryEntity, (category) => category.events)
   category?: ICategories;
-
-  @Column()
-  createdAt: Date;
-
-  @Column()
-  updatedAt: Date;
 }
