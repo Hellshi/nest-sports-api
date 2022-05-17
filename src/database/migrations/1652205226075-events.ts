@@ -11,6 +11,7 @@ export class events1652205226075 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
             isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'operation',
@@ -20,6 +21,11 @@ export class events1652205226075 implements MigrationInterface {
           {
             name: 'value',
             type: 'int',
+            isNullable: false,
+          },
+          {
+            name: 'name',
+            type: 'varchar',
             isNullable: false,
           },
           {

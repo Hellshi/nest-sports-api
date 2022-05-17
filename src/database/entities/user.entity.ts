@@ -1,15 +1,12 @@
 import { ICategories } from 'src/categories/interfaces/categories';
 import { IPlayer } from 'src/players/interfaces/player';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
 import { BaseModel, CategoryEntity } from './';
 
 @Entity({
   name: 'users',
 })
 export class UserEntity extends BaseModel implements IPlayer {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
   name: string;
 

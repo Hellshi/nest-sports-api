@@ -16,6 +16,7 @@ export class categories1652205243751 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
             isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'description',

@@ -1,6 +1,9 @@
-import { BaseEntity, CreateDateColumn } from 'typeorm';
+import { BaseEntity, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 export abstract class BaseModel extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
   createdAt: Date;
 

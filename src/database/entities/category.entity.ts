@@ -4,9 +4,7 @@ import {
   Entity,
   JoinTable,
   OneToMany,
-  OneToOne,
-  // eslint-disable-next-line prettier/prettier
-  PrimaryGeneratedColumn
+  OneToOne
 } from 'typeorm';
 import { ICategories, IEvent } from '../../categories/interfaces/categories';
 import { BaseModel, EventEntity, UserEntity } from './';
@@ -15,9 +13,6 @@ import { BaseModel, EventEntity, UserEntity } from './';
   name: 'categories',
 })
 export class CategoryEntity extends BaseModel implements ICategories {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
   description: string;
 
