@@ -13,15 +13,19 @@ export class CategoriesService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    await this.categoryRepository.save(createCategoryDto);
+    return this.categoryRepository.save(createCategoryDto);
   }
 
   findAll() {
-    return `This action returns all categories`;
+    return this.categoryRepository.find({
+      relations: ['user', 'events'],
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} category`;
+    return this.categoryRepository.findOneOrFail(id, {
+      relations: ['user', 'events'],
+    });
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {

@@ -21,6 +21,7 @@ import { PlayersModule } from './players/players.module';
       database: config().database.database,
       entities: ['./database/entities/*.ts'],
       autoLoadEntities: true,
+      migrationsRun: true,
     }),
     CategoriesModule,
   ],

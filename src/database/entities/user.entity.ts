@@ -1,6 +1,6 @@
 import { ICategories } from 'src/categories/interfaces/categories';
 import { IPlayer } from 'src/players/interfaces/player';
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, ManyToMany } from 'typeorm';
 import { BaseModel, CategoryEntity } from './';
 
 @Entity({
@@ -25,7 +25,7 @@ export class UserEntity extends BaseModel implements IPlayer {
   @Column()
   raking?: string;
 
-  @OneToOne(() => CategoryEntity, (category) => category.player)
+  @ManyToMany(() => CategoryEntity, (category) => category.user)
   category?: ICategories;
 
   @Column({

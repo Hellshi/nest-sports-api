@@ -11,5 +11,5 @@ export interface ICategories {
   description: string;
   playerId: number;
   events?: IEvent[];
-  player?: IPlayer;
+  user?: IPlayer;
 }
