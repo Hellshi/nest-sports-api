@@ -16,7 +16,7 @@ export class CategoriesService {
     return this.categoryRepository.save(createCategoryDto);
   }
 
-  findAll() {
+  async findAll() {
     return this.categoryRepository.find({
       relations: ['events', 'user'],
     });
