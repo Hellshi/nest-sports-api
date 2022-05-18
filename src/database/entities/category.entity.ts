@@ -1,5 +1,5 @@
 import { IPlayer } from 'src/players/interfaces/player';
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToOne, OneToMany } from 'typeorm';
 import { ICategories, IEvent } from '../../categories/interfaces/categories';
 import { BaseModel, EventEntity, UserEntity } from './';
 
@@ -10,7 +10,7 @@ export class CategoryEntity extends BaseModel implements ICategories {
   @Column()
   description: string;
 
-  @ManyToMany(() => EventEntity, (events) => events.category, { cascade: true })
+  @OneToMany(() => EventEntity, (events) => events.category, { cascade: true })
   @JoinTable({
     name: 'events',
     joinColumn: {
@@ -20,9 +20,9 @@ export class CategoryEntity extends BaseModel implements ICategories {
   })
   events?: IEvent[];
 
-  @ManyToMany(() => UserEntity, (user) => user.category)
+  @ManyToOne(() => UserEntity, (user) => user.category)
   user?: IPlayer;
 
   @Column()
-  playerId: number;
+  userId: number;
 }

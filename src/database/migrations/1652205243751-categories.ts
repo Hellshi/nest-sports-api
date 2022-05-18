@@ -24,7 +24,7 @@ export class categories1652205243751 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'playerId',
+            name: 'userId',
             type: 'int',
             isNullable: false,
           },
@@ -45,7 +45,7 @@ export class categories1652205243751 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'categories',
       new TableForeignKey({
-        columnNames: ['playerId'],
+        columnNames: ['userId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
       }),

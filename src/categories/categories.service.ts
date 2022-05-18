@@ -18,7 +18,7 @@ export class CategoriesService {
 
   findAll() {
     return this.categoryRepository.find({
-      relations: ['user', 'events'],
+      relations: ['events', 'user'],
     });
   }
 

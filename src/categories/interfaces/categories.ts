@@ -9,7 +9,7 @@ export interface IEvent {
 export interface ICategories {
   id: number;
   description: string;
-  playerId: number;
+  userId: number;
   events?: IEvent[];
   user?: IPlayer;
 }

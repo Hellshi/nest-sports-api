@@ -1,5 +1,5 @@
 import { ICategories, IEvent } from 'src/categories/interfaces/categories';
-import { Column, Entity, ManyToMany } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { BaseModel, CategoryEntity } from './';
 
 @Entity({
@@ -18,6 +18,6 @@ export class EventEntity extends BaseModel implements IEvent {
   @Column()
   categoryId: number;
 
-  @ManyToMany(() => CategoryEntity, (category) => category.events)
+  @ManyToOne(() => CategoryEntity, (category) => category.events)
   category?: ICategories;
 }
