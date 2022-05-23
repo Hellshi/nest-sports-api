@@ -16,13 +16,16 @@ export class BaseRepository<T> implements IRepository<T> {
     return this.repository.find();
   }
 
-  /* get(id: any): Promise<T> {
-    return this.repository.findById(id).populate(this._populateOnFind).exec();
+  findById(id: number | string): Promise<T> {
+    return this.repository.findOneOrFail(id);
   }
 
-  create(item: Partial<T>): Promise<T> {
-    return this.repository.create(item);
-  } */
+  async insert(payload: Partial<T>): Promise<T> {
+    payload as T;
+    return this.repository.manager.save(
+      Object.assign(new this.objectType(), payload as T),
+    );
+  }
 
   async update(id: string | number, payload: Partial<T>) {
     const item = await this.repository.findOne(id);
@@ -33,5 +36,17 @@ export class BaseRepository<T> implements IRepository<T> {
     return this.repository.manager.save(
       Object.assign(new this.objectType(), item, payload),
     );
+  }
+
+  async findBy<TValue>(key: keyof T, value: TValue): Promise<T | undefined> {
+    return this.repository.findOne({
+      where: {
+        [key]: value,
+      },
+    });
+  }
+
+  async delete(id: number): Promise<any> {
+    return this.repository.delete(id);
   }
 }
