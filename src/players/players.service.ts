@@ -1,6 +1,7 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import IRepositoryCatalog from 'src/database/repositories/IRepositoryCatalog';
+import { repositoryCatalogFactory } from 'src/database/repositories/RepositoryCatalogFactory';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../database/entities/user.entity';
 import { CreatePlayerDto } from './interfaces/dtos/create-player.dto';
@@ -13,10 +14,11 @@ export class PlayersService {
   private reposirory: IRepositoryCatalog;
 
   constructor(
-    @Inject('BaseRepository') reposirory: IRepositoryCatalog,
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
-  ) {}
+  ) {
+    this.reposirory = repositoryCatalogFactory();
+  }
 
   async createPlayer(player: CreatePlayerDto): Promise<IPlayer> {
     const Existingplayer = await this.usersRepository.findOne(undefined, {

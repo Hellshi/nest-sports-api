@@ -24,6 +24,7 @@ import { PlayersModule } from './players/players.module';
       migrationsRun: true,
     }),
     CategoriesModule,
+    PlayersModule,
   ],
   controllers: [],
   providers: [],

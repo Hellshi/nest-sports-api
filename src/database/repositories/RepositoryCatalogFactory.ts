@@ -7,8 +7,3 @@ export function repositoryCatalogFactory(): RepositoryCatalog {
 
   return new RepositoryCatalog(queryRunner.manager);
 }
-
-export const repositoryCatalogProvider = {
-  provide: 'BaseRepository',
-  useValue: repositoryCatalogFactory(),
-};
