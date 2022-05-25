@@ -16,9 +16,9 @@ export class BaseRepository<T> implements IRepository<T> {
     return this.repository.findOneOrFail(id);
   }
 
-  async insert(payload: T): Promise<T> {
+  async insert(payload: T | any): Promise<T> {
     payload as T;
-    return this.repository.manager.save(payload);
+    return this.repository.save(payload);
   }
 
   async update(id: string | number, payload: T) {
