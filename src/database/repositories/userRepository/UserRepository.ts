@@ -1,13 +1,19 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/database/entities';
-import { EntityManager } from 'typeorm';
+import { Repository } from 'typeorm';
 import { BaseRepository } from '../BaseRepository';
 import { IUserRepository } from './IUserRepository';
 
+@Injectable()
 export default class UserRepository
   extends BaseRepository<UserEntity>
   implements IUserRepository
 {
-  constructor(entityManager: EntityManager) {
-    super(entityManager, UserEntity);
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly usersRepository: Repository<UserEntity>,
+  ) {
+    super(usersRepository);
   }
 }

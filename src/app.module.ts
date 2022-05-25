@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriesModule } from './categories/categories.module';
 import config from './configuration/config';
-import { repositoryCatalogFactory } from './database/repositories/RepositoryCatalogFactory';
 import { PlayersModule } from './players/players.module';
 
 @Module({
@@ -28,12 +27,6 @@ import { PlayersModule } from './players/players.module';
     PlayersModule,
   ],
   controllers: [],
-  providers: [
-    {
-      provide: 'REPOSITORY_CATALOG',
-      useValue: () => repositoryCatalogFactory(),
-    },
-  ],
-  exports: ['REPOSITORY_CATALOG'],
+  providers: [],
 })
 export class AppModule {}
