@@ -1,31 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CategoryEntity } from 'src/database/entities';
-import { Repository } from 'typeorm';
+import { Inject, Injectable } from '@nestjs/common';
+import { ICategoryRepository } from 'src/database/repositories/categories/ICategoriesRepository';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoriesService {
+  private categoryRepository: ICategoryRepository;
   constructor(
-    @InjectRepository(CategoryEntity)
-    private readonly categoryRepository: Repository<CategoryEntity>,
-  ) {}
+    @Inject('REPOSITORY_CATALOG') categoryRepository: ICategoryRepository,
+  ) {
+    this.categoryRepository = categoryRepository;
+  }
 
   async create(createCategoryDto: CreateCategoryDto) {
-    return this.categoryRepository.save(createCategoryDto);
+    return this.categoryRepository.insert(createCategoryDto);
   }
 
   async findAll() {
-    return this.categoryRepository.find({
-      relations: ['events', 'user'],
-    });
+    return this.categoryRepository.findAllWithRelations(['events', 'user']);
   }
 
   findOne(id: number) {
-    return this.categoryRepository.findOneOrFail(id, {
-      relations: ['user', 'events'],
-    });
+    return this.categoryRepository.findWithRelations({ id }, [
+      'user',
+      'events',
+    ]);
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {

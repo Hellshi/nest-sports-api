@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { IRepository } from './IRepository';
+import { Criteria, IRepository } from './IRepository';
 
 export class BaseRepository<T> implements IRepository<T> {
   private repository: Repository<T>;
@@ -40,5 +40,21 @@ export class BaseRepository<T> implements IRepository<T> {
 
   async delete(id: number): Promise<any> {
     return this.repository.delete(id);
+  }
+
+  async findWithRelations(
+    criteria: Criteria<T> | Criteria<T>[],
+    relations: string[],
+  ): Promise<T[]> {
+    return this.repository.find({
+      where: criteria,
+      relations,
+    });
+  }
+
+  async findAllWithRelations(relations: string[]): Promise<T[]> {
+    return this.repository.find({
+      relations,
+    });
   }
 }
