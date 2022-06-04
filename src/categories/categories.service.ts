@@ -5,15 +5,15 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoriesService {
-  private categoryRepository: ICategoryRepository;
+  private repository: ICategoryRepository;
   constructor(
     @Inject('REPOSITORY_CATALOG') categoryRepository: ICategoryRepository,
   ) {
-    this.categoryRepository = categoryRepository;
+    this.repository = categoryRepository;
   }
 
   async create(createCategoryDto: CreateCategoryDto) {
-    return this.categoryRepository.insert(createCategoryDto);
+    return this.repository.insert(createCategoryDto);
   }
 
   async findAll() {
@@ -21,17 +21,14 @@ export class CategoriesService {
   }
 
   findOne(id: number) {
-    return this.categoryRepository.findWithRelations({ id }, [
-      'user',
-      'events',
-    ]);
+    return this.repository.findWithRelations({ id }, ['user', 'events']);
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+    return this.repository.update(id, updateCategoryDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} category`;
+    return this.repository.delete(id);
   }
 }
