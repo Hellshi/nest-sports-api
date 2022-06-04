@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriesModule } from './categories/categories.module';
 import config from './configuration/config';
 import { PlayersModule } from './players/players.module';
+import { ChallengesModule } from './challenges/challenges.module';
+import { MatchesModule } from './matches/matches.module';
+import { SetResultsModule } from './set-results/set-results.module';
 
 @Module({
   imports: [
@@ -25,6 +28,9 @@ import { PlayersModule } from './players/players.module';
     }),
     CategoriesModule,
     PlayersModule,
+    ChallengesModule,
+    MatchesModule,
+    SetResultsModule,
   ],
   controllers: [],
   providers: [],
