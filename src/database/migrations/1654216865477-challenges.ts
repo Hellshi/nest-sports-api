@@ -34,6 +34,7 @@ export class challenges1654216865477 implements MigrationInterface {
           {
             name: 'matchId',
             type: 'integer',
+            isNullable: true,
           },
           {
             name: 'created_at',

@@ -1,9 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSetResultDto } from './dto/create-set-result.dto';
-import { UpdateSetResultDto } from './dto/update-set-result.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { IMatchRepository } from 'src/database/repositories/matchesRepository/IMatchRepository';
+import { CreateSetResultDto } from './interfaces/dto/create-set-result.dto';
+import { UpdateSetResultDto } from './interfaces/dto/update-set-result.dto';
 
 @Injectable()
 export class SetResultsService {
+  private repository: IMatchRepository;
+  constructor(@Inject('REPOSITORY_CATALOG') matchRepository: IMatchRepository) {
+    this.repository = matchRepository;
+  }
   create(createSetResultDto: CreateSetResultDto) {
     return 'This action adds a new setResult';
   }

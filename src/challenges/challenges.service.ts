@@ -1,9 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { IChallengeRepository } from 'src/database/repositories/challengesRepository/IChallengeRepository';
 import { CreateChallengeDto } from './interfaces/dto/create-challenge.dto';
 import { UpdateChallengeDto } from './interfaces/dto/update-challenge.dto';
 
 @Injectable()
 export class ChallengesService {
+  private repository: IChallengeRepository;
+  constructor(
+    @Inject('REPOSITORY_CATALOG') challengeRepository: IChallengeRepository,
+  ) {
+    this.repository = challengeRepository;
+  }
   create(createChallengeDto: CreateChallengeDto) {
     return 'This action adds a new challenge';
   }

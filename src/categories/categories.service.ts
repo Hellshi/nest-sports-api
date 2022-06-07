@@ -17,7 +17,7 @@ export class CategoriesService {
   }
 
   async findAll() {
-    return this.categoryRepository.findAllWithRelations(['events', 'user']);
+    return this.repository.findAllWithRelations(['events', 'user']);
   }
 
   findOne(id: number) {

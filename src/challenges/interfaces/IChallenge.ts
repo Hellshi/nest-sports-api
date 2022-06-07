@@ -1,7 +1,14 @@
 import { ICategories } from 'src/categories/interfaces/categories';
 import { IPlayer } from 'src/players/interfaces/player';
 
-export type TStatus = 'ACCOMPLISHED' | 'PENDING' | 'DENIED' | 'ACCEPTED';
+export const TStatusValues = [
+  'ACCOMPLISHED',
+  'PENDING',
+  'DENIED',
+  'ACCEPTED',
+] as const;
+
+export type TStatus = typeof TStatusValues[number];
 
 export interface IChallenge {
   id: number;
@@ -12,7 +19,7 @@ export interface IChallenge {
   status: TStatus;
   categoryId: number;
   category?: ICategories;
-  matchId: number;
+  matchId?: number;
   match?: any;
   createdAt: Date;
   updatedAt: Date;

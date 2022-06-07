@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post
+} from '@nestjs/common';
+import { CreateSetResultDto } from './interfaces/dto/create-set-result.dto';
+import { UpdateSetResultDto } from './interfaces/dto/update-set-result.dto';
 import { SetResultsService } from './set-results.service';
-import { CreateSetResultDto } from './dto/create-set-result.dto';
-import { UpdateSetResultDto } from './dto/update-set-result.dto';
 
 @Controller('set-results')
 export class SetResultsController {
@@ -23,7 +31,10 @@ export class SetResultsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSetResultDto: UpdateSetResultDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateSetResultDto: UpdateSetResultDto,
+  ) {
     return this.setResultsService.update(+id, updateSetResultDto);
   }
 

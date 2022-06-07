@@ -22,6 +22,11 @@ export class match1654216876992 implements MigrationInterface {
             type: 'integer',
           },
           {
+            name: 'resultId',
+            type: 'integer',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

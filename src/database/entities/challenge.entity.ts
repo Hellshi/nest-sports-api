@@ -1,11 +1,26 @@
-import { IChallenge, TStatus } from 'src/challenges/interfaces';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { BaseModel } from './base.entity';
+import { ICategories } from 'src/categories/interfaces/categories';
+import { IMatch } from 'src/matches/interfaces/IMatch';
+import { IPlayer } from 'src/players/interfaces/player';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm';
+import {
+  IChallenge,
+  TStatus,
+  TStatusValues
+} from '../../challenges/interfaces';
+import { BaseModel, MatchesEntity } from './';
+import { CategoryEntity } from './category.entity';
+import { UserEntity } from './user.entity';
 
 @Entity({
   name: 'challenges',
 })
-export class Challenges extends BaseModel implements IChallenge {
+export class ChallengesEntity extends BaseModel implements IChallenge {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,6 +32,7 @@ export class Challenges extends BaseModel implements IChallenge {
 
   @Column({
     type: 'enum',
+    enum: TStatusValues,
   })
   status: TStatus;
 
@@ -24,5 +40,17 @@ export class Challenges extends BaseModel implements IChallenge {
   categoryId: number;
 
   @Column()
-  matchId: number;
+  matchId?: number;
+
+  @OneToOne(() => MatchesEntity, (match) => match.challenge)
+  match?: IMatch;
+
+  @ManyToOne(() => CategoryEntity, (category) => category.challenges)
+  category?: ICategories;
+
+  @ManyToOne(() => UserEntity, (user) => user.challenges)
+  challenged?: IPlayer;
+
+  @ManyToOne(() => UserEntity, (user) => user.challenges)
+  challenger?: IPlayer;
 }
